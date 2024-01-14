@@ -65,4 +65,19 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    void testCreateUser_whenLastNameIsEmpty_returnIllegalException() {
+        //Arrange
+        String lastName = " ";
+        String expectedExceptionMessage = "User's First name is empty";
+
+        //Act
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, ()-> {
+                    userService.createUser(firstName, lastName, email, password, repeatPassword);
+                }, "Should have thrown an Exception");
+
+        //Assert
+        assertEquals(expectedExceptionMessage, thrown.getMessage(), "Exception are not same");
+    }
+
 }
