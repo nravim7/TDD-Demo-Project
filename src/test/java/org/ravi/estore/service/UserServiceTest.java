@@ -1,8 +1,10 @@
 package org.ravi.estore.service;
 
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.ravi.estore.model.User;
@@ -20,6 +22,7 @@ public class UserServiceTest {
 
 
 
+
     @BeforeEach
     void init() {
         userService = new UserServiceImpl();
@@ -30,6 +33,7 @@ public class UserServiceTest {
         repeatPassword = "12345";
 
     }
+
 
     @DisplayName("User object created")
     @Test
@@ -43,6 +47,7 @@ public class UserServiceTest {
         //Assert
         assertNotNull(user, "The createUser() should not have returned null");
         assertEquals(firstName, user.getFirstName(),"User's first name is incorrect");
+
         assertEquals(lastName, user.getLastName(), "User's last name is incorrect");
         assertEquals(email, user.getEmail(), "Email is different");
         assertNotNull(user.getId(),"User id is not generated");
@@ -78,6 +83,10 @@ public class UserServiceTest {
 
         //Assert
         assertEquals(expectedExceptionMessage, thrown.getMessage(), "Exception are not same");
+    }
+
+
+
     }
 
 }
