@@ -1,7 +1,6 @@
 package org.ravi.estore.service;
 
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -19,8 +18,6 @@ public class UserServiceTest {
     String email;
     String password;
     String repeatPassword;
-
-
 
 
     @BeforeEach
@@ -42,15 +39,15 @@ public class UserServiceTest {
 
 
         //Act
-        User user = userService.createUser(firstName,lastName, email,password, repeatPassword);
+        User user = userService.createUser(firstName, lastName, email, password, repeatPassword);
 
         //Assert
         assertNotNull(user, "The createUser() should not have returned null");
-        assertEquals(firstName, user.getFirstName(),"User's first name is incorrect");
+        assertEquals(firstName, user.getFirstName(), "User's first name is incorrect");
 
         assertEquals(lastName, user.getLastName(), "User's last name is incorrect");
         assertEquals(email, user.getEmail(), "Email is different");
-        assertNotNull(user.getId(),"User id is not generated");
+        assertNotNull(user.getId(), "User id is not generated");
 
     }
 
@@ -62,8 +59,8 @@ public class UserServiceTest {
 
         //Act
         IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-                    userService.createUser(firstName, lastName, email, password, repeatPassword);
-                }, "Empty First Name should have caused an Illegal Argument exception");
+            userService.createUser(firstName, lastName, email, password, repeatPassword);
+        }, "Empty First Name should have caused an Illegal Argument exception");
 
         //Assert
         assertEquals(expectedExceptionMessage, thrown.getMessage(), "Exception error message is not correct");
@@ -77,16 +74,14 @@ public class UserServiceTest {
         String expectedExceptionMessage = "User's First name is empty";
 
         //Act
-        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, ()-> {
-                    userService.createUser(firstName, lastName, email, password, repeatPassword);
-                }, "Should have thrown an Exception");
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            userService.createUser(firstName, lastName, email, password, repeatPassword);
+        }, "Should have thrown an Exception");
 
         //Assert
         assertEquals(expectedExceptionMessage, thrown.getMessage(), "Exception are not same");
     }
 
 
-
-    }
-
 }
+
