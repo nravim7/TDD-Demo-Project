@@ -6,13 +6,26 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.ravi.estore.data.UserRepository;
 import org.ravi.estore.model.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
-    UserService userService;
+
+    @InjectMocks
+    UserServiceImpl userService;
+
+    @Mock
+    UserRepository userRepository;
     String firstName;
     String lastName;
     String email;
@@ -22,7 +35,6 @@ public class UserServiceTest {
 
     @BeforeEach
     void init() {
-        userService = new UserServiceImpl();
         firstName = "Ravi";
         lastName = "Nagaraju";
         email = "test@gmail.com";
@@ -36,6 +48,7 @@ public class UserServiceTest {
     @Test
     void testCreateUser_whenUserDetailsProvided_returnsUserObject() {
         //Arrange
+        when(userRepository.save(any(User.class))).thenReturn(true);
 
 
         //Act
@@ -48,6 +61,8 @@ public class UserServiceTest {
         assertEquals(lastName, user.getLastName(), "User's last name is incorrect");
         assertEquals(email, user.getEmail(), "Email is different");
         assertNotNull(user.getId(), "User id is not generated");
+
+        verify(userRepository).save(any(User.class)); // same as verify(userRepository, times(1)).save(any(User.class));
 
     }
 
